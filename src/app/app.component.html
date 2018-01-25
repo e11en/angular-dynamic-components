@@ -2,8 +2,12 @@
   <img width="100" alt="Logo" src="http://www.ellenlangelaar.nl/img/Logo.png">
 </div>
 
-<!-- <router-outlet name="menu"></router-outlet> -->
+<div class="list">
+  <ul>
+    <li (click)="createComponent('InfoComponent', 'doei')">Create info component</li>
+  </ul>
+</div>
 
-
-<router-outlet></router-outlet>
-
+<div class="wrapper">
+  <template #alertContainer></template>
+</div>

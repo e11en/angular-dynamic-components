@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AppComponent } from '@app/app.component';
 import { FormComponent } from '@app/components/form/form.component';
 import { InfoComponent } from '@app/components/info/info.component';
 import { MenuComponent } from '@app/components/menu/menu.component';
-import { ScreenComponent } from '@app/components/screen/screen.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ScreenComponent
+    component: AppComponent
   },
   {
     path: '',

@@ -1,4 +1,3 @@
-// imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,16 +10,13 @@ import { AppComponent } from './app.component';
 import { FormComponent } from '@app/components/form/form.component';
 import { InfoComponent } from '@app/components/info/info.component';
 import { MenuComponent } from '@app/components/menu/menu.component';
-import { ScreenComponent } from '@app/components/screen/screen.component';
 
-// @NgModule decorator with its metadata
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     InfoComponent,
     MenuComponent,
-    ScreenComponent
   ],
   imports: [
     BrowserModule,
