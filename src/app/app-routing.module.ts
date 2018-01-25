@@ -21,6 +21,10 @@ const routes: Routes = [
     component: InfoComponent
   },
   {
+    path: 'form',
+    component: FormComponent
+  },
+  {
     path: '**',
     redirectTo: ''
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,9 @@ import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@ang
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+  @Input() data: string;
+  @Output() output = new EventEmitter();
+
   private form: FormGroup;
   private objProps = [];
   private listItems = [];

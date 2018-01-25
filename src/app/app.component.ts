@@ -3,14 +3,15 @@ import {Component, NgModule, Input, ComponentFactory, ComponentRef, ComponentFac
 import {BrowserModule} from '@angular/platform-browser';
 
 import {InfoComponent} from './components/info/info.component';
+import {FormComponent} from './components/form/form.component';
 
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html',
-styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  @ViewChild('alertContainer', { read: ViewContainerRef }) container;
+  @ViewChild('screenContainer', { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
 
   constructor(private resolver: ComponentFactoryResolver) {}
@@ -26,8 +27,10 @@ export class AppComponent implements OnDestroy {
 
   getComponent(name) {
     switch (name) {
-    case 'InfoComponent':
-      return InfoComponent;
+      case 'InfoComponent':
+        return InfoComponent;
+      case 'FormComponent':
+        return FormComponent;
     }
   }
 

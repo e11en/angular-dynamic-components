@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent {
-  @Input() data = 'hallo 123';
+  @Input() data: string;
   @Output() output = new EventEmitter();
 
   constructor() { }
