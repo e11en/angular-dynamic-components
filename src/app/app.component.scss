@@ -1,0 +1,23 @@
+ul {
+    list-style: none;
+    margin-top: 20px;
+
+    li {
+        display: inline-block;
+
+        a {
+            padding: 10px;
+            background-color: #1552a0;
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                background-color: #336cb5;
+            }
+        }
+    }
+}
+
+.wrapper {
+    padding: 1em;
+}

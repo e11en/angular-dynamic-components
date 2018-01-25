@@ -1,0 +1,117 @@
+{
+    "data" : [{
+        "0" : [
+            {
+                "key" : "employee_first_name",
+                "label" : "first name",
+                "type" : "text",
+                "value" : "John"
+            },
+            {
+                "key" : "employee_prefix",
+                "label" : "prefix",
+                "type" : "text",
+                "value" : ""
+            },
+            {
+                "key" : "employee_last_name",
+                "label" : "first name",
+                "type" : "text",
+                "value" : "Doe"
+            },
+            {
+                "key" : "employee_photo",
+                "label" : "photo",
+                "type" : "image",
+                "value" : "assets/man.png"
+            },
+            {
+                "key" : "employee_manager_id",
+                "label" : "manager",
+                "type" : "select",
+                "value" : "4",
+                "children" : [
+                    { "value" : "1", "label" : "Aubry Ashton" },
+                    { "value" : "2", "label" : "Robert William" },
+                    { "value" : "3", "label" : "Patrick Star" },
+                    { "value" : "4", "label" : "Samantha Smith" }
+                ]
+            },
+            {
+                "key" : "employee_email",
+                "label" : "email",
+                "type" : "email",
+                "value" : "example@example.com"
+            },
+            {
+                "key" : "employee_hourly_rate",
+                "label" : "hourly rate",
+                "type" : "number",
+                "value" : "80"
+            },
+            {
+                "key" : "employee_end_date",
+                "label" : "end date",
+                "type" : "date",
+                "value" : "2019-05-22T16:47:56.33Z"
+            }                           
+        ],
+        "1" : [
+            {
+                "key" : "employee_first_name",
+                "label" : "first name",
+                "type" : "text",
+                "value" : "Sam"
+            },
+            {
+                "key" : "employee_prefix",
+                "label" : "prefix",
+                "type" : "text",
+                "value" : "the"
+            },
+            {
+                "key" : "employee_last_name",
+                "label" : "first name",
+                "type" : "text",
+                "value" : "Smith"
+            },
+            {
+                "key" : "employee_photo",
+                "label" : "photo",
+                "type" : "image",
+                "value" : "assets/man2.png"
+            },
+            {
+                "key" : "employee_manager_id",
+                "label" : "manager",
+                "type" : "select",
+                "value" : "1",
+                "children" : [
+                    { "value" : "1", "label" : "Aubry Ashton" },
+                    { "value" : "2", "label" : "Robert William" },
+                    { "value" : "3", "label" : "Patrick Star" },
+                    { "value" : "4", "label" : "Samantha Smith" }               
+                ]
+            },
+            {
+                "key" : "employee_email",
+                "label" : "email",
+                "type" : "email",
+                "value" : "example@example.com"
+            },
+            {
+                "key" : "employee_hourly_rate",
+                "label" : "hourly rate",
+                "type" : "number",
+                "value" : "80"
+            },
+            {
+                "key" : "employee_end_date",
+                "label" : "end date",
+                "type" : "date",
+                "value" : ""
+            }                           
+        ]
+    }]
+
+}

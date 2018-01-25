@@ -1,0 +1,32 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 500px;
+}
+
+.list {
+    border-right: 1px solid grey;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        background-color: #ecebeb;
+        border: 1px solid #d2d2d2;
+
+        &:hover {
+            background-color: lightgray;
+        }
+    }
+}
+
+.form {
+    padding-left: 20px;
+
+    img {
+        width: 100px;
+    }
+}
