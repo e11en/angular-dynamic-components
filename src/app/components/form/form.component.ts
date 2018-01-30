@@ -11,7 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     <input type="text" [value]="data?.text"/>
   </div>
   `,
-  styles: ['.wrapper { background-color: #e48484; margin-top: 1em; }']
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
   @Input() data: Array<string>;

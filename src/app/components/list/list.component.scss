@@ -1,0 +1,20 @@
+.wrapper { 
+    background-color: #a1a1e0; 
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    background-color: #cacaca;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1em;
+
+    &:hover {
+        background-color: #c1c0c0;
+        color: grey; 
+        cursor: pointer;
+    }
+}

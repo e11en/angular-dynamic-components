@@ -11,7 +11,7 @@ import {FormComponent} from '../components/form/form.component';
   selector: 'app-root',
   template: `
   <style>
-    .wrapper { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+    .wrapper { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr 1fr }
   </style>
 
   <div class="wrapper">
