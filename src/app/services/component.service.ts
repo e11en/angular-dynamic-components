@@ -21,22 +21,22 @@ export class ComponentService {
     ] }
   ];
 
-  getAllEntities(): Array<string> {
+  getEntityLinks(): Array<string> {
     const entities = [];
     for (const i in this.jsonData) {
-      entities.push(this.jsonData[i].entity);
+      const entity = this.jsonData[i].entity;
+      entities.push({ text: entity, link: entity });
     }
     return entities;
   }
 
-  getEntity(path: string): Entity {
+  getEntity(name: string): Entity {
     for (const i in this.jsonData) {
       const entity = this.jsonData[i];
-      if (entity.entity === path) {
+      if (entity.entity === name) {
         return entity;
       }
     }
-
     return null;
   }
 
@@ -51,13 +51,14 @@ export class ComponentService {
     }
   }
 
-  getData(list: Array<any>, id: string) {
-    for (const i in list) {
-      const item = list[i];
-      if (item.id.toString() === id) {
-        return item;
-      }
-    }
+  getData(entity: Entity, id: string) {
+    return new Promise((resolve, reject) => {
+      entity.data.forEach(item => {
+        if (item.id.toString() === id) {
+          resolve(item);
+        }
+      });
+    });
   }
 }
 

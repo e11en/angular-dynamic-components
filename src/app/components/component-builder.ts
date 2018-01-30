@@ -21,13 +21,13 @@ import { Entity } from '@app/models/entity.model';
   <div class="wrapper">
     <h1>Main component</h1>
     <h1>Detail component</h1>
-    <template #list></template>
+    <template #main></template>
     <template #detail></template>
   </div>
   `
 })
 export class ComponentBuilder implements OnInit {
-  @ViewChild('list', { read: ViewContainerRef }) container;
+  @ViewChild('main', { read: ViewContainerRef }) container;
   @ViewChild('detail', { read: ViewContainerRef }) detailContainer;
   componentRef: ComponentRef<any>;
   detailComponentRef: ComponentRef<any>;
@@ -80,7 +80,9 @@ export class ComponentBuilder implements OnInit {
       this.createDetailComponent(entity.detail, urlSegment);
 
       if (urlSegment.parameters.id) {
-        this.detailComponentRef.instance.data = this.componentService.getData(entity.data, urlSegment.parameters.id);
+        this.componentService.getData(entity, urlSegment.parameters.id).then(data => {
+          this.detailComponentRef.instance.data = data;
+        });
       }
     }
   }

@@ -21,8 +21,6 @@ export class MenuComponent implements OnInit {
   constructor(private componentService: ComponentService) { }
 
   ngOnInit() {
-    this.componentService.getAllEntities().forEach(entity => {
-      this.menuItems.push({ text: entity, link: entity });
-    });
+    this.menuItems = this.componentService.getEntityLinks();
   }
 }
