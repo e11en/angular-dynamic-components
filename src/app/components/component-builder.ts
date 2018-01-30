@@ -73,7 +73,7 @@ export class ComponentBuilder implements OnInit {
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = entity.data;
     this.componentRef.instance.output.subscribe(event => {
-      this.router.navigate(['/projects', { id: event.id }]);
+      this.router.navigate(['/' + entity.entity, { id: event.id }]);
     });
 
     if (entity.detail) {
