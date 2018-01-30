@@ -14,8 +14,11 @@ export class ComponentService {
       {id: 2, text: 'some more text', userId: 1},
       {id: 3, text: 'even more text'}
     ]},
-    { entity: 'users', componentType: 'form', data: {id: 1, text: 'Some user'} },
-    { entity: 'other', componentType: 'list', data: [{id: 1, text: 'Some thing'}] }
+    { entity: 'user', componentType: 'form', data: {id: 1, text: 'Some user'} },
+    { entity: 'other', componentType: 'list', data: [
+      {id: 1, text: 'Some thing'},
+      {id: 2, text: 'Some other thing'}
+    ] }
   ];
 
   getAllEntities(): Array<string> {
