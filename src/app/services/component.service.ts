@@ -9,15 +9,21 @@ import { FormComponent } from '../components/form/form.component';
 export class ComponentService {
 
   jsonData = [
-    { entity: 'users', componentType: 'form', data: {id: 1, text: 'Some user'} },
     { entity: 'projects', componentType: 'list', detail: { componentType: 'form' }, data: [
       {id: 1, text: 'some text', userId: 1},
       {id: 2, text: 'some more text', userId: 1},
       {id: 3, text: 'even more text'}
-    ]}
+    ]},
+    { entity: 'users', componentType: 'form', data: {id: 1, text: 'Some user'} }
   ];
 
-  constructor() { }
+  getAllEntities(): Array<string> {
+    const entities = [];
+    for (const i in this.jsonData) {
+      entities.push(this.jsonData[i].entity);
+    }
+    return entities;
+  }
 
   getEntity(path: string): Entity {
     for (const i in this.jsonData) {
