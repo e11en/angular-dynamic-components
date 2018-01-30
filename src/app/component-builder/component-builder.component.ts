@@ -39,7 +39,8 @@ export class ComponentBuilder implements OnDestroy, OnInit {
   ];
 
   constructor(private resolver: ComponentFactoryResolver,
-              private activatedRoute: ActivatedRoute) {}
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit() {
     this.activatedRoute.url.subscribe((urlSegments) => {
@@ -49,7 +50,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
         inputData.push({path: segment.path, parameters: this.formatParameters(segment.parameters)});
       });
 
-      this.createComponent(urlSegments.pop().path);
+      this.createComponent(urlSegments.pop());
     });
   }
 
@@ -71,30 +72,31 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     return list;
   }
 
-  createComponent(path) {
+  createComponent(urlSegment) {
     this.destroyComponents();
     this.container.clear();
-    const entity = this.getEntity(path);
+    const entity = this.getEntity(urlSegment.path);
+    if (!entity) { return; }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
 
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = entity.data;
     this.componentRef.instance.output.subscribe(event => {
-      console.log(event);
-      if (this.detailComponentRef) {
-        this.detailComponentRef.instance.data = event;
-      }
+      this.router.navigate(['/projects', { id: event.id }]);
     });
 
     if (entity.detail) {
       this.createDetailComponent(entity.detail);
+
+      if (urlSegment.parameters.id) {
+        this.detailComponentRef.instance.data = this.getData(entity.data, urlSegment.parameters.id);
+      }
     }
   }
 
   createDetailComponent(entity) {
     this.detailContainer.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
-
     this.detailComponentRef = this.detailContainer.createComponent(factory);
     this.detailComponentRef.instance.output.subscribe(event => console.log(event));
   }
@@ -118,6 +120,15 @@ export class ComponentBuilder implements OnDestroy, OnInit {
         return FormComponent;
       default:
         return null;
+    }
+  }
+
+  getData(list, id) {
+    for (const i in list) {
+      const item = list[i];
+      if (item.id.toString() === id) {
+        return item;
+      }
     }
   }
 
