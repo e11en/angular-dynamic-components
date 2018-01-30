@@ -12,6 +12,7 @@ import {FormComponent} from '../components/form/form.component';
   template: `
   <style>
     .wrapper { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr 1fr }
+    h1 { text-align: center }
   </style>
 
   <div class="wrapper">
