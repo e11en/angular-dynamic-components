@@ -29,10 +29,8 @@ export class FormComponent implements OnInit {
     // There must a better/cleaner way of achieving the same
     if (this.currentUrl && this.data) {
       this.routerLink = [];
-      this.routerLink.push(this.currentUrl.path);
-      this.routerLink.push(this.currentUrl.parameters);
-      this.routerLink.push('users');
-      this.routerLink.push({id: this.data.userId});
+      this.routerLink.push(this.currentUrl.path, this.currentUrl.parameters);
+      this.routerLink.push('users', {id: this.data.userId});
     }
   }
 
