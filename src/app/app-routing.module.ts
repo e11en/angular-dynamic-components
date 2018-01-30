@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from '@app/app.component';
-import { FormComponent } from '@app/components/form/form.component';
-import { InfoComponent } from '@app/components/info/info.component';
+import { ComponentBuilder } from '@app/component-builder/component-builder.component';
 import { MenuComponent } from '@app/components/menu/menu.component';
 
 const routes: Routes = [
@@ -17,16 +16,8 @@ const routes: Routes = [
     outlet: 'menu'
   },
   {
-    path: 'info',
-    component: InfoComponent
-  },
-  {
-    path: 'form',
-    component: FormComponent
-  },
-  {
     path: '**',
-    redirectTo: ''
+    component: ComponentBuilder
   }
 ];
 

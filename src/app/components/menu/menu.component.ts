@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
   private menuItems = [
-    {text: 'form', component: 'InfoComponent'},
-    {text: 'info', link: 'info'}
+    {text: 'projects', link: 'projects'},
+    {text: 'users', link: 'users'}
   ];
 
   constructor() { }

@@ -7,16 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormComponent } from '@app/components/form/form.component';
-import { InfoComponent } from '@app/components/info/info.component';
+import { ComponentBuilder } from '@app/component-builder/component-builder.component';
 import { MenuComponent } from '@app/components/menu/menu.component';
+import { ListComponent } from '@app/components/list/list.component';
+import { FormComponent } from '@app/components/form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent,
-    InfoComponent,
+    ComponentBuilder,
     MenuComponent,
+    ListComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,7 @@ import { MenuComponent } from '@app/components/menu/menu.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ListComponent, FormComponent]
 })
 export class AppModule { }

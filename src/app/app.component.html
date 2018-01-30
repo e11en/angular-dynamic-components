@@ -1,17 +1,6 @@
 <div style="text-align:center">
   <img width="100" alt="Logo" src="http://www.ellenlangelaar.nl/img/Logo.png">
 </div>
+<router-outlet name="menu"></router-outlet>
 
-<!-- <router-outlet></router-outlet>
-<router-outlet name="menu"></router-outlet> -->
-
-<div class="list">
-  <ul>
-    <li (click)="createComponent('InfoComponent', 'doei')">Create info component</li>
-    <li (click)="createComponent('FormComponent', 'doei')">Create form component</li>
-  </ul>
-</div>
-
-<div class="wrapper">
-  <template #screenContainer></template>
-</div>
+<router-outlet></router-outlet>
