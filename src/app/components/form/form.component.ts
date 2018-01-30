@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
     if (this.currentUrl && this.data) {
       this.routerLink = [];
       this.routerLink.push(this.currentUrl.path, this.currentUrl.parameters);
-      this.routerLink.push('users', {id: this.data.userId});
+      this.routerLink.push('user', {id: this.data.userId});
     }
   }
 
