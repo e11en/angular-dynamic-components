@@ -45,6 +45,7 @@ export class ComponentBuilder implements OnInit {
         inputData.push({path: segment.path, parameters: this.formatParameters(segment.parameters)});
       });
 
+      // Create the component from the last url segment
       this.createComponent(urlSegments.pop());
     });
   }
@@ -64,18 +65,28 @@ export class ComponentBuilder implements OnInit {
   }
 
   createComponent(urlSegment: any) {
+    // Start with a clean slate
     this.destroyComponents();
     this.container.clear();
+    this.detailContainer.clear();
+
+    // Get the component based on the url path
     const entity = this.componentService.getEntity(urlSegment.path);
     const component = this.componentService.getComponent(entity.componentType);
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
 
+    // Add the component to the container
+    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.componentRef = this.container.createComponent(factory);
+
+    // Set the @Input data of the component
     this.componentRef.instance.data = entity.data;
+
+    // Handle the @Output of the component
     this.componentRef.instance.output.subscribe(event => {
       this.router.navigate(['/' + entity.entity, { id: event.id }]);
     });
 
+    // Add a detail component
     if (entity.detail) {
       this.createDetailComponent(entity.detail, urlSegment);
 
@@ -88,7 +99,6 @@ export class ComponentBuilder implements OnInit {
   }
 
   createDetailComponent(entity: any, urlSegment: any) {
-    this.detailContainer.clear();
     const component = this.componentService.getComponent(entity.componentType);
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.detailComponentRef = this.detailContainer.createComponent(factory);
