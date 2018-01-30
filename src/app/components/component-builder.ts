@@ -17,14 +17,14 @@ import { FormComponent } from '../components/form/form.component';
   <div class="wrapper">
     <h1>Main component</h1>
     <h1>Detail component</h1>
-    <template #screen></template>
+    <template #list></template>
     <template #detail></template>
   </div>
   `,
   styles: ['.wrapper { background-color: #a1e0c0; }']
 })
 export class ComponentBuilder implements OnDestroy, OnInit {
-  @ViewChild('screen', { read: ViewContainerRef }) container;
+  @ViewChild('list', { read: ViewContainerRef }) container;
   @ViewChild('detail', { read: ViewContainerRef }) detailContainer;
   componentRef: ComponentRef<any>;
   detailComponentRef: ComponentRef<any>;
