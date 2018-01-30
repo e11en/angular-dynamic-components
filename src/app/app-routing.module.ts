@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppComponent } from '@app/app.component';
 import { ComponentBuilder } from '@app/component-builder/component-builder.component';
 import { MenuComponent } from '@app/components/menu/menu.component';
 
