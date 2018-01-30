@@ -50,12 +50,6 @@ export class ComponentBuilder implements OnInit {
     });
   }
 
-  destroyComponents() {
-    if (this.componentRef || this.detailComponentRef) { console.log('destroy components'); }
-    if (this.componentRef) { this.componentRef.destroy(); }
-    if (this.detailComponentRef) { this.detailComponentRef.destroy(); }
-  }
-
   formatParameters(parameters: any) {
     const list = [];
     Object.keys(parameters).forEach(key => {
@@ -66,7 +60,6 @@ export class ComponentBuilder implements OnInit {
 
   createComponent(urlSegment: any) {
     // Start with a clean slate
-    this.destroyComponents();
     this.container.clear();
     this.detailContainer.clear();
 
