@@ -8,20 +8,23 @@ import { FormComponent } from '../components/form/form.component';
 
 @Component({
   selector: 'app-root',
-  template: `
-  <style>
-    .wrapper { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr 1fr }
-    h1 { text-align: center }
-  </style>
+  styles: [`
+    .wrapper {
+      background-color: #a1e0c0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto 1fr 1fr;
+    }
 
+    h1 { text-align: center }
+  `],
+  template: `
   <div class="wrapper">
     <h1>Main component</h1>
     <h1>Detail component</h1>
     <template #list></template>
     <template #detail></template>
   </div>
-  `,
-  styles: ['.wrapper { background-color: #a1e0c0; }']
+  `
 })
 export class ComponentBuilder implements OnDestroy, OnInit {
   @ViewChild('list', { read: ViewContainerRef }) container;
