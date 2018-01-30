@@ -86,7 +86,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     });
 
     if (entity.detail) {
-      this.createDetailComponent(entity.detail);
+      this.createDetailComponent(entity.detail, urlSegment);
 
       if (urlSegment.parameters.id) {
         this.detailComponentRef.instance.data = this.getData(entity.data, urlSegment.parameters.id);
@@ -94,10 +94,11 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     }
   }
 
-  createDetailComponent(entity: any) {
+  createDetailComponent(entity: any, urlSegment: any) {
     this.detailContainer.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
     this.detailComponentRef = this.detailContainer.createComponent(factory);
+    this.detailComponentRef.instance.currentUrl = urlSegment;
     this.detailComponentRef.instance.output.subscribe(event => console.log(event));
   }
 

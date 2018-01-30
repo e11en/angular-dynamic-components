@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -10,15 +11,29 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     <label>Text</label>
     <input type="text" [value]="data?.text"/>
     <br>
-    <a *ngIf="data?.userId" [routerLink]="['users', {id: data?.userId}]">Go to user</a>
+    <a *ngIf="routerLink" [routerLink]="routerLink">Go to user</a>
   </div>
   `,
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent {
-  @Input() data: Array<string>;
+export class FormComponent implements OnInit {
+  @Input() currentUrl: any;
+  @Input() data: Array<any>;
   @Output() output = new EventEmitter();
 
-  constructor() { }
+  routerLink: Array<any>;
+
+  constructor(private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    // There must a better/cleaner way of achieving the same
+    if (this.currentUrl && this.data) {
+      this.routerLink = [];
+      this.routerLink.push(this.currentUrl.path);
+      this.routerLink.push(this.currentUrl.parameters);
+      this.routerLink.push('users');
+      this.routerLink.push({id: this.data.userId});
+    }
+  }
 
 }
