@@ -9,6 +9,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     <br>
     <label>Text</label>
     <input type="text" [value]="data?.text"/>
+    <br>
+    <a *ngIf="data?.userId" [routerLink]="['users', {id: data?.userId}]">Go to user</a>
   </div>
   `,
   styleUrls: ['./form.component.scss']
