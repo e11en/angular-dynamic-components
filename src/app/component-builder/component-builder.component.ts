@@ -29,7 +29,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
   componentRef: ComponentRef<any>;
   detailComponentRef: ComponentRef<any>;
   jsonData = [
-    { entity: 'users', componentType: 'list', data: [{id: 1, text: 'Some user'}] },
+    { entity: 'users', componentType: 'form', data: {id: 1, text: 'Some user'} },
     { entity: 'projects', componentType: 'list', detail: { componentType: 'form' }, data: [
       {id: 1, text: 'some text'},
       {id: 2, text: 'some more text'},
