@@ -113,7 +113,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     return null;
   }
 
-  getComponent(type: string) {
+  getComponent(type: string): any {
     switch (type) {
       case 'list':
         return ListComponent;
