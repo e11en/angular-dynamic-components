@@ -64,7 +64,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     if (this.detailComponentRef) { this.detailComponentRef.destroy(); }
   }
 
-  formatParameters(parameters) {
+  formatParameters(parameters: any) {
     const list = [];
     Object.keys(parameters).forEach(key => {
       list.push({key: key, value: parameters[key]});
@@ -72,7 +72,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     return list;
   }
 
-  createComponent(urlSegment) {
+  createComponent(urlSegment: any) {
     this.destroyComponents();
     this.container.clear();
     const entity = this.getEntity(urlSegment.path);
@@ -94,14 +94,14 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     }
   }
 
-  createDetailComponent(entity) {
+  createDetailComponent(entity: any) {
     this.detailContainer.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
     this.detailComponentRef = this.detailContainer.createComponent(factory);
     this.detailComponentRef.instance.output.subscribe(event => console.log(event));
   }
 
-  getEntity(path) {
+  getEntity(path: string): Entity {
     for (const i in this.jsonData) {
       const entity = this.jsonData[i];
       if (entity.entity === path) {
@@ -112,7 +112,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     return null;
   }
 
-  getComponent(type) {
+  getComponent(type: string) {
     switch (type) {
       case 'list':
         return ListComponent;
@@ -123,7 +123,7 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     }
   }
 
-  getData(list, id) {
+  getData(list: Array<any>, id: string) {
     for (const i in list) {
       const item = list[i];
       if (item.id.toString() === id) {
@@ -132,4 +132,8 @@ export class ComponentBuilder implements OnDestroy, OnInit {
     }
   }
 
+}
+
+class Entity {
+  constructor(public entity: string, public componentType: string, public data: any, public detail?: {}) { }
 }
