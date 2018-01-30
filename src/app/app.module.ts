@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComponentBuilder } from '@app/component-builder/component-builder.component';
+import { ComponentBuilder } from '@app/component-builder/component-builder';
 import { MenuComponent } from '@app/components/menu/menu.component';
 import { ListComponent } from '@app/components/list/list.component';
 import { FormComponent } from '@app/components/form/form.component';
