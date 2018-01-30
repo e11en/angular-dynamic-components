@@ -1,11 +1,10 @@
 /* tslint:disable:component-class-suffix forin */
-import {Component, NgModule, Input, ComponentFactory, ComponentRef, ComponentFactoryResolver,
-        ViewContainerRef, ChangeDetectorRef, TemplateRef, ViewChild, Output, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Component, NgModule, ComponentFactory, ComponentRef, ComponentFactoryResolver,
+         ViewContainerRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import {ListComponent} from '../components/list/list.component';
-import {FormComponent} from '../components/form/form.component';
+import { ListComponent } from '../components/list/list.component';
+import { FormComponent } from '../components/form/form.component';
 
 @Component({
   selector: 'app-root',
