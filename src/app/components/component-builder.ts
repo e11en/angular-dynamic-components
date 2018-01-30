@@ -1,10 +1,10 @@
-/* tslint:disable:component-class-suffix forin */
+/* tslint:disable:component-class-suffix */
 import { Component, NgModule, ComponentFactory, ComponentRef, ComponentFactoryResolver,
          ViewContainerRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ListComponent } from '../components/list/list.component';
-import { FormComponent } from '../components/form/form.component';
+import { ComponentService } from '@app/services/component.service';
+import { Entity } from '@app/models/entity.model';
 
 @Component({
   selector: 'app-root',
@@ -26,23 +26,16 @@ import { FormComponent } from '../components/form/form.component';
   </div>
   `
 })
-export class ComponentBuilder implements OnDestroy, OnInit {
+export class ComponentBuilder implements OnInit {
   @ViewChild('list', { read: ViewContainerRef }) container;
   @ViewChild('detail', { read: ViewContainerRef }) detailContainer;
   componentRef: ComponentRef<any>;
   detailComponentRef: ComponentRef<any>;
-  jsonData = [
-    { entity: 'users', componentType: 'form', data: {id: 1, text: 'Some user'} },
-    { entity: 'projects', componentType: 'list', detail: { componentType: 'form' }, data: [
-      {id: 1, text: 'some text', userId: 1},
-      {id: 2, text: 'some more text', userId: 1},
-      {id: 3, text: 'even more text'}
-    ]}
-  ];
 
   constructor(private resolver: ComponentFactoryResolver,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router,
+              private componentService: ComponentService) {}
 
   ngOnInit() {
     this.activatedRoute.url.subscribe((urlSegments) => {
@@ -54,10 +47,6 @@ export class ComponentBuilder implements OnDestroy, OnInit {
 
       this.createComponent(urlSegments.pop());
     });
-  }
-
-  ngOnDestroy() {
-    this.destroyComponents();
   }
 
   destroyComponents() {
@@ -77,9 +66,9 @@ export class ComponentBuilder implements OnDestroy, OnInit {
   createComponent(urlSegment: any) {
     this.destroyComponents();
     this.container.clear();
-    const entity = this.getEntity(urlSegment.path);
-    if (!entity) { return; }
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
+    const entity = this.componentService.getEntity(urlSegment.path);
+    const component = this.componentService.getComponent(entity.componentType);
+    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
 
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = entity.data;
@@ -91,52 +80,18 @@ export class ComponentBuilder implements OnDestroy, OnInit {
       this.createDetailComponent(entity.detail, urlSegment);
 
       if (urlSegment.parameters.id) {
-        this.detailComponentRef.instance.data = this.getData(entity.data, urlSegment.parameters.id);
+        this.detailComponentRef.instance.data = this.componentService.getData(entity.data, urlSegment.parameters.id);
       }
     }
   }
 
   createDetailComponent(entity: any, urlSegment: any) {
     this.detailContainer.clear();
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.getComponent(entity.componentType));
+    const component = this.componentService.getComponent(entity.componentType);
+    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.detailComponentRef = this.detailContainer.createComponent(factory);
     this.detailComponentRef.instance.currentUrl = urlSegment;
     this.detailComponentRef.instance.output.subscribe(event => console.log(event));
   }
 
-  getEntity(path: string): Entity {
-    for (const i in this.jsonData) {
-      const entity = this.jsonData[i];
-      if (entity.entity === path) {
-        return entity;
-      }
-    }
-
-    return null;
-  }
-
-  getComponent(type: string): any {
-    switch (type) {
-      case 'list':
-        return ListComponent;
-      case 'form':
-        return FormComponent;
-      default:
-        return null;
-    }
-  }
-
-  getData(list: Array<any>, id: string) {
-    for (const i in list) {
-      const item = list[i];
-      if (item.id.toString() === id) {
-        return item;
-      }
-    }
-  }
-
-}
-
-class Entity {
-  constructor(public entity: string, public componentType: string, public data: any, public detail?: {}) { }
 }

@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ComponentService } from '@app/services/component.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentBuilder } from '@app/components/component-builder';
@@ -27,7 +29,7 @@ import { FormComponent } from '@app/components/form/form.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ComponentService],
   bootstrap: [AppComponent],
   entryComponents: [ListComponent, FormComponent]
 })
