@@ -8,10 +8,6 @@ import { MenuComponent } from '@app/components/menu/menu.component';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
-  },
-  {
-    path: '',
     component: MenuComponent,
     outlet: 'menu'
   },
