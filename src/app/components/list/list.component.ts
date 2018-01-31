@@ -1,20 +1,25 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import { AppState } from '@app/state/app.state';
 
 @Component({
   selector: 'app-list',
   template: `
   <div class="wrapper">
     <ul>
-      <li *ngFor="let item of data" (click)="output.next(item)">{{item.id}}: {{item.text}}</li>
+      <li *ngFor="let item of listItems$ | async">{{item.displayValue}}</li>
     </ul>
   </div>
   `,
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  @Input() data: Array<string>;
-  @Output() output = new EventEmitter();
+  listItems$: Observable<string>;
 
-  constructor() { }
-
+  constructor(private store: Store<AppState>) {
+    this.listItems$ = this.store.select('listItems');
+    this.store.dispatch({type: 'GET_ALL'});
+  }
 }
