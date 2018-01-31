@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { ComponentService } from '@app/services/component.service';
 
@@ -13,6 +14,8 @@ import { ComponentBuilder } from '@app/components/component-builder';
 import { MenuComponent } from '@app/components/menu/menu.component';
 import { ListComponent } from '@app/components/list/list.component';
 import { FormComponent } from '@app/components/form/form.component';
+
+import { listReducer } from '@app/components/list/list.reducer';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { FormComponent } from '@app/components/form/form.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ listItems: listReducer }),
   ],
   providers: [ComponentService],
   bootstrap: [AppComponent],
