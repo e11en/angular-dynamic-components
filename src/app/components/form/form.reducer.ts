@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-export function listReducer(state: Array<any> = [], action: Action) {
+export function formReducer(state: any = {id: null, text: null}, action: Action) {
     switch (action.type) {
-        case 'SET_LIST':
+        case 'SET_FORM':
             return state = action.payload;
         default:
             return state;

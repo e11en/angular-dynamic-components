@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ComponentService } from '@app/services/component.service';
 import { Entity } from '@app/models/entity.model';
+import { ListComponent } from '../components/list/list.component';
+import { FormComponent } from '../components/form/form.component';
 
 @Component({
   selector: 'app-root',
@@ -65,38 +67,35 @@ export class ComponentBuilder implements OnInit {
 
     // Get the component based on the url path
     const entity = this.componentService.getEntity(urlSegment.path);
-    const component = this.componentService.getComponent(entity.componentType);
+    const component = this.getComponent(entity.componentType);
 
     // Add the component to the container
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.componentRef = this.container.createComponent(factory);
 
-    // Set the @Input data of the component
-    // this.componentRef.instance.data = entity.data;
-
-    // // Handle the @Output of the component
-    // this.componentRef.instance.output.subscribe(event => {
-    //   this.router.navigate(['/' + entity.entity, { id: event.id }]);
-    // });
+    this.componentService.getData(entity);
 
     // Add a detail component
     if (entity.detail) {
       this.createDetailComponent(entity.detail, urlSegment);
-
-      if (urlSegment.parameters.id) {
-        this.componentService.getData(entity, urlSegment.parameters.id).then(data => {
-          this.detailComponentRef.instance.data = data;
-        });
-      }
     }
   }
 
   createDetailComponent(entity: any, urlSegment: any) {
-    const component = this.componentService.getComponent(entity.componentType);
+    const component = this.getComponent(entity.componentType);
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.detailComponentRef = this.detailContainer.createComponent(factory);
-    this.detailComponentRef.instance.currentUrl = urlSegment;
-    this.detailComponentRef.instance.output.subscribe(event => console.log(event));
+  }
+
+  getComponent(type: string): any {
+    switch (type) {
+      case 'list':
+        return ListComponent;
+      case 'form':
+        return FormComponent;
+      default:
+        return null;
+    }
   }
 
 }

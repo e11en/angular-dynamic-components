@@ -1,20 +1,26 @@
 /* tslint:disable:forin */
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppState } from '@app/state/app.state';
 
 import { Entity } from '@app/models/entity.model';
-import { ListComponent } from '../components/list/list.component';
-import { FormComponent } from '../components/form/form.component';
 
 @Injectable()
 export class ComponentService {
 
+  constructor(private store: Store<AppState>) {  }
+
   jsonData = [
     { entity: 'projects', componentType: 'list', detail: { componentType: 'form' }, data: [
       {id: 1, text: 'some text', userId: 1},
-      {id: 2, text: 'some more text', userId: 1},
+      {id: 2, text: 'some more text', userId: 2},
       {id: 3, text: 'even more text'}
     ]},
-    { entity: 'user', componentType: 'form', data: {id: 1, text: 'Some user'} },
+    { entity: 'users', componentType: 'form', data: [
+      {id: 1, text: 'Some user'},
+      {id: 2, text: 'Some other user'}
+    ]},
     { entity: 'other', componentType: 'list', data: [
       {id: 1, text: 'Some thing'},
       {id: 2, text: 'Some other thing'}
@@ -40,24 +46,15 @@ export class ComponentService {
     return null;
   }
 
-  getComponent(type: string): any {
-    switch (type) {
-      case 'list':
-        return ListComponent;
-      case 'form':
-        return FormComponent;
-      default:
-        return null;
+  getData(entity: Entity, id?: string) {
+    if (id == null) {
+      this.store.dispatch({type: 'SET_LIST', payload: entity.data});
     }
-  }
 
-  getData(entity: Entity, id: string) {
-    return new Promise((resolve, reject) => {
-      entity.data.forEach(item => {
-        if (item.id.toString() === id) {
-          resolve(item);
-        }
-      });
+    entity.data.forEach(item => {
+      if (item.id.toString() === id) {
+        this.store.dispatch({type: 'SET_FORM', payload: entity.data});
+      }
     });
   }
 }

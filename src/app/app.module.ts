@@ -16,6 +16,7 @@ import { ListComponent } from '@app/components/list/list.component';
 import { FormComponent } from '@app/components/form/form.component';
 
 import { listReducer } from '@app/components/list/list.reducer';
+import { formReducer } from '@app/components/form/form.reducer';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,10 @@ import { listReducer } from '@app/components/list/list.reducer';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    StoreModule.forRoot({ listItems: listReducer }),
+    StoreModule.forRoot({
+      formItem: formReducer,
+      listItems: listReducer
+    })
   ],
   providers: [ComponentService],
   bootstrap: [AppComponent],

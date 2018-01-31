@@ -1,37 +1,28 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import { AppState } from '@app/state/app.state';
 
 @Component({
   selector: 'app-form',
   template: `
-  <div class="wrapper">
+  <div class="wrapper" *ngIf="formItem$ | async as f">
     <label>Id</label>
-    <input type="number" [value]="data?.id" disabled/>
+    <input type="number" [value]="f.id" disabled/>
     <br>
     <label>Text</label>
-    <input type="text" [value]="data?.text"/>
+    <input type="text" [value]="f.text"/>
     <br>
-    <a *ngIf="this.data?.userId" [routerLink]="routerLink">Go to user</a>
+    <a *ngIf="f.userId" href="#">Go to user</a>
   </div>
   `,
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
-  @Input() currentUrl: any;
-  @Input() data: Array<any>;
-  @Output() output = new EventEmitter();
+export class FormComponent {
+  formItem$: Observable<any>;
 
-  routerLink: Array<any>;
-
-  constructor(private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit() {
-    // There must a better/cleaner way of achieving the same
-    if (this.currentUrl && this.data) {
-      this.routerLink = [];
-      this.routerLink.push(this.currentUrl.path, this.currentUrl.parameters);
-      this.routerLink.push('user', {id: this.data.userId});
-    }
+  constructor(private store: Store<AppState>) {
+    this.formItem$ = this.store.select('formItem');
   }
-
 }

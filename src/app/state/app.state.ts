@@ -1,3 +1,11 @@
+import { Action } from '@ngrx/store';
+
 export interface AppState {
-    listItems: string;
+    listItems: Array<any>;
+    formItem: any;
+}
+
+export interface NgAction extends Action {
+    type: string;
+    payload?: any;
 }
