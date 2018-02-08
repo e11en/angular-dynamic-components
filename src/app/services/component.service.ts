@@ -17,14 +17,19 @@ export class ComponentService {
       {id: 2, text: 'some more text', userId: 2},
       {id: 3, text: 'even more text'}
     ]},
-    { entity: 'users', componentType: 'form', data: [
-      {id: 1, text: 'Some user'},
-      {id: 2, text: 'Some other user'}
+    { entity: 'projects2', componentType: 'list', detail: { componentType: 'form' }, data: [
+      {id: 1, text: 'some other text', userId: 1},
+      {id: 2, text: 'some more other text', userId: 2},
+      {id: 3, text: 'even more other text'}
     ]},
-    { entity: 'other', componentType: 'list', data: [
-      {id: 1, text: 'Some thing'},
-      {id: 2, text: 'Some other thing'}
-    ] }
+    // { entity: 'users', componentType: 'form', data: [
+    //   {id: 1, text: 'Some user'},
+    //   {id: 2, text: 'Some other user'}
+    // ]},
+    // { entity: 'other', componentType: 'list', data: [
+    //   {id: 1, text: 'Some thing'},
+    //   {id: 2, text: 'Some other thing'}
+    // ] }
   ];
 
   getEntityLinks(): Array<string> {

@@ -1,101 +1,20 @@
 /* tslint:disable:component-class-suffix */
-import { Component, NgModule, ComponentFactory, ComponentRef, ComponentFactoryResolver,
-         ViewContainerRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
+import { AppState, RouteState } from '@app/state/app.state';
 import { ComponentService } from '@app/services/component.service';
-import { Entity } from '@app/models/entity.model';
-import { ListComponent } from '../components/list/list.component';
-import { FormComponent } from '../components/form/form.component';
 
 @Component({
-  selector: 'app-root',
-  styles: [`
-    .wrapper {
-      background-color: #a1e0c0;
-      display: grid; grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto 1fr 1fr;
-    }
-
-    h1 { text-align: center }
-  `],
+  selector: 'app-list',
   template: `
-  <div class="wrapper">
-    <h1>Main component</h1>
-    <h1>Detail component</h1>
-    <template #main></template>
-    <template #detail></template>
-  </div>
-  `
+    <app-big></app-big>
+  `,
 })
-export class ComponentBuilder implements OnInit {
-  @ViewChild('main', { read: ViewContainerRef }) container;
-  @ViewChild('detail', { read: ViewContainerRef }) detailContainer;
-  componentRef: ComponentRef<any>;
-  detailComponentRef: ComponentRef<any>;
+export class ComponentBuilder {
 
-  constructor(private resolver: ComponentFactoryResolver,
-              private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private componentService: ComponentService) {}
-
-  ngOnInit() {
-    this.activatedRoute.url.subscribe((urlSegments) => {
-      const inputData = [];
-
-      urlSegments.forEach(segment => {
-        inputData.push({path: segment.path, parameters: this.formatParameters(segment.parameters)});
-      });
-
-      // Create the component from the last url segment
-      this.createComponent(urlSegments.pop());
-    });
-  }
-
-  formatParameters(parameters: any) {
-    const list = [];
-    Object.keys(parameters).forEach(key => {
-      list.push({key: key, value: parameters[key]});
-    });
-    return list;
-  }
-
-  createComponent(urlSegment: any) {
-    // Start with a clean slate
-    this.container.clear();
-    this.detailContainer.clear();
-
-    // Get the component based on the url path
-    const entity = this.componentService.getEntity(urlSegment.path);
-    const component = this.getComponent(entity.componentType);
-
-    // Add the component to the container
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
-    this.componentRef = this.container.createComponent(factory);
-
-    this.componentService.getData(entity);
-
-    // Add a detail component
-    if (entity.detail) {
-      this.createDetailComponent(entity.detail, urlSegment);
-    }
-  }
-
-  createDetailComponent(entity: any, urlSegment: any) {
-    const component = this.getComponent(entity.componentType);
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
-    this.detailComponentRef = this.detailContainer.createComponent(factory);
-  }
-
-  getComponent(type: string): any {
-    switch (type) {
-      case 'list':
-        return ListComponent;
-      case 'form':
-        return FormComponent;
-      default:
-        return null;
-    }
-  }
-
+  constructor(private store: Store<RouteState>) {
+    // this.store.dispatch({type: 'SET_METADATA', payload: [{ title: 'hallo', paragraph: 'test 123'}]});
+   }
 }

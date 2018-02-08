@@ -14,7 +14,7 @@ import { AppState } from '@app/state/app.state';
     <label>Text</label>
     <input type="text" [value]="f.text"/>
     <br>
-    <a *ngIf="f.userId" href="#">Go to user</a>
+    <!-- <a *ngIf="f.userId" href="#/users">Go to user</a> -->
   </div>
   `,
   styleUrls: ['./form.component.scss']

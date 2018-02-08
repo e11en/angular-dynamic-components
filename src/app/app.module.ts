@@ -14,9 +14,11 @@ import { ComponentBuilder } from '@app/components/component-builder';
 import { MenuComponent } from '@app/components/menu/menu.component';
 import { ListComponent } from '@app/components/list/list.component';
 import { FormComponent } from '@app/components/form/form.component';
+import { BigComponent } from '@app/components/big/big.component';
 
 import { listReducer } from '@app/components/list/list.reducer';
 import { formReducer } from '@app/components/form/form.reducer';
+import { metaDataReducer } from '@app/state/route.reducer';
 
 @NgModule({
   declarations: [
@@ -24,17 +26,20 @@ import { formReducer } from '@app/components/form/form.reducer';
     ComponentBuilder,
     MenuComponent,
     ListComponent,
-    FormComponent
+    FormComponent,
+    BigComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({
       formItem: formReducer,
-      listItems: listReducer
+      listItems: listReducer,
+      metaData: metaDataReducer
     })
   ],
   providers: [ComponentService],
